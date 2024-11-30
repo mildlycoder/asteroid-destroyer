@@ -8,8 +8,7 @@ function love.load()
   love.mouse.setVisible(false)
   _G.mouse_x, _G.mouse_y = 0, 0
 
-  local debugging = true
-  _G.player = Player(debugging)
+  _G.player = Player()
   _G.game = Game()
   game:startGame(player, true)
 end
@@ -18,6 +17,10 @@ function love.keypressed(key)
   if game.state.running then
     if key == "up" or key == "w" then
       player.thrusting = true
+    end
+
+    if key == "space" then
+      player:shootLasers()
     end
   end
 end
@@ -45,6 +48,10 @@ function love.update(dt)
     player:movePlayer()
     for _, asteroid in pairs(game.asteroids) do
       asteroid:move(dt)
+    end
+
+    for _, laser in pairs(player.lasers) do
+      laser:move()
     end
   end
 end

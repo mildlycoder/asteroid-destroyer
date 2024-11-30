@@ -38,10 +38,7 @@ function Game()
       self:changeGameState("running")
       local x_ast = math.random(love.graphics.getWidth())
       local y_ast = math.random(love.graphics.getHeight())
-      table.insert(self.asteroids,1, Asteroid(x_ast, y_ast, 100, self.level, true))
-      table.insert(self.asteroids,1, Asteroid(math.random(love.graphics.getWidth()), math.random(love.graphics.getHeight()), 100, self.level, true))
-      table.insert(self.asteroids,1, Asteroid(math.random(love.graphics.getWidth()), math.random(love.graphics.getHeight()), 100, self.level, true))
-      table.insert(self.asteroids,1, Asteroid(math.random(love.graphics.getWidth()), math.random(love.graphics.getHeight()), 100, self.level, true))
+      table.insert(self.asteroids,1, Asteroid(math.random(love.graphics.getWidth()), math.random(love.graphics.getHeight()), 100, self.level))
     end
   }
 end

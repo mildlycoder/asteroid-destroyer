@@ -1,7 +1,6 @@
 local love = require("love")
 
-function Asteroid(x, y, astSize, level, debugging)
-  debugging = debugging or false
+function Asteroid(x, y, astSize, level)
 
   local ASTEROID_VERT = 10
   local JAGGED = 0.4
@@ -37,7 +36,7 @@ function Asteroid(x, y, astSize, level, debugging)
 
       love.graphics.polygon("fill", points)
 
-      if debugging then
+      if show_debugging then
         love.graphics.setColor(1, 0, 0)
         love.graphics.circle("line", self.x, self.y, self.radius)
       end
