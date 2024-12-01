@@ -115,7 +115,11 @@ function Player(debugging)
 
       for index, laser in pairs(self.lasers) do
         laser:move()
-        if laser.distance > MAX_LASER_DISTANCE * love.graphics.getWidth() then
+        if laser.distance > MAX_LASER_DISTANCE * love.graphics.getWidth() and not laser.exploded then
+          self.destroyLaser(self, index)
+        end
+
+        if laser.explodeTime == 0 then
           self.destroyLaser(self, index)
         end
       end
