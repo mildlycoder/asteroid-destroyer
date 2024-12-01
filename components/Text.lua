@@ -1,6 +1,6 @@
 local love = require("love")
 
-function Text(text, x, y, fontSize, opacity,fadeIn,fadeOut,wrapWidth, align)
+function Text(text, x, y, fontSize, opacity, fadeIn, fadeOut, wrapWidth, align)
   fontSize = fontSize or "p"
   opacity = opacity or 1
   fadeIn = fadeIn or false
@@ -16,9 +16,10 @@ function Text(text, x, y, fontSize, opacity,fadeIn,fadeOut,wrapWidth, align)
     p = love.graphics.newFont(10),
   }
 
-  function ifFadeIn ()
+  function ifFadeIn()
     opacity = 0.1
   end
+
   return {
     text = text,
     x = x,
@@ -27,19 +28,19 @@ function Text(text, x, y, fontSize, opacity,fadeIn,fadeOut,wrapWidth, align)
     draw = function(self, tbl_text, index)
       if fadeIn then
         if self.opacity < 1 then
-          self.opacity = self.opacity + (1/FADE_DUR/love.timer.getFPS())
+          self.opacity = self.opacity + (1 / FADE_DUR / love.timer.getFPS())
         end
       elseif fadeOut then
-        self.opacity = self.opacity - (1/ FADE_DUR/ love.timer.getFPS())
+        self.opacity = self.opacity - (1 / FADE_DUR / love.timer.getFPS())
       end
       if self.opacity > 0 then
-        love.graphics.setColor(1,1,1,self.opacity)
+        love.graphics.setColor(1, 1, 1, self.opacity)
         love.graphics.setFont(fonts[fontSize])
         love.graphics.printf(self.text, self.x, self.y, wrapWidth, align)
       else
         table.remove(tbl_text, index)
       end
-    end
+    end,
   }
 end
 
