@@ -52,6 +52,18 @@ function Game()
 					"center"
 				)
 				gameOverText:draw()
+        local restartText = Text(
+					"PRESS R to restart",
+					0,
+					love.graphics.getHeight() * 0.7,
+					"h3",
+					1,
+					false,
+					false,
+					love.graphics.getWidth(),
+					"center"
+				)
+				restartText:draw()
 			end
 
 			local pointsText =
@@ -91,6 +103,16 @@ function Game()
 			)
 			table.insert(self.asteroids, asteroid)
 		end,
+
+    restartGame = function (self)
+      self.asteroids = {}
+      self.points = 0
+      self.level =1
+      player.x = love.graphics.getWidth()/2
+      player.y = love.graphics.getHeight()/2
+      player.angle = 0
+      self:startGame()
+    end
 	}
 end
 

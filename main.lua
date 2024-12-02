@@ -11,7 +11,7 @@ function love.load()
 
 	_G.player = Player()
 	_G.game = Game()
-	game:startGame(player)
+	game:startGame()
 end
 
 function love.keypressed(key)
@@ -22,6 +22,11 @@ function love.keypressed(key)
 
 		if key == "space" then
 			player:shootLasers()
+		end
+	end
+	if game.state.ended then
+		if key == "r" then
+			game:restartGame()
 		end
 	end
 end
@@ -51,9 +56,9 @@ function love.update(dt)
 			local asteroid = game.asteroids[i]
 			asteroid:move(dt)
 
-      if calculateDistance(player.x, player.y, asteroid.x, asteroid.y) <= asteroid.radius then
-        game:endGame()
-      end
+			if calculateDistance(player.x, player.y, asteroid.x, asteroid.y) <= asteroid.radius then
+				game:endGame()
+			end
 			for j = #player.lasers, 1, -1 do
 				local laser = player.lasers[j]
 				if
@@ -71,13 +76,12 @@ function love.update(dt)
 		for _, laser in pairs(player.lasers) do
 			laser:move()
 		end
-
 	end
 end
 
 function love.draw()
 	player:draw(game.state.paused)
-  game:draw(game.state.ended)
+	game:draw(game.state.ended)
 	Text("Points " .. game.points, 0, 20, "h3", 1, false, true, love.graphics.getWidth(), "center"):draw()
 	for _, asteroid in pairs(game.asteroids) do
 		asteroid:draw(game.state.paused)
